@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-
 const int MAX_INCORRECT_GUESSES = 6; // maximum number of incorrect guesses allowed
 
 int main()
@@ -59,7 +58,17 @@ int main()
       correctGuesses.push_back(guess);
 
       // Check if the player has won
-      if (correctGuesses.size() == secretWord.size())
+      bool won = true;
+      for (char ch : secretWord)
+      {
+        if (std::find(correctGuesses.begin(), correctGuesses.end(), ch) == correctGuesses.end())
+        {
+          won = false;
+          break;
+        }
+      }
+
+      if (won)
       {
         std::cout << "Congratulations, you won!" << std::endl;
         break;
@@ -82,4 +91,3 @@ int main()
   }
 
   return 0;
-}
