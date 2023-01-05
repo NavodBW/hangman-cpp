@@ -90,4 +90,6 @@ int main()
     std::cout << "Sorry, you lost. The secret word was: " << secretWord << std::endl;
   }
 
-  return 0;
+  system("pause");
+
+  return 0;}
