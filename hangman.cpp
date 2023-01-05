@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 
+
 const int MAX_INCORRECT_GUESSES = 6; // maximum number of incorrect guesses allowed
 
 int main()
@@ -46,31 +47,36 @@ int main()
     }
     std::cout << std::endl;
 
-    // Prompt the player to enter a guess
-    std::cout << "Enter a guess: ";
-    char guess;
-    std::cin >> guess;
+ // Print the number of remaining incorrect guesses
+std::cout << "Remaining Incorrect Guesses: " << MAX_INCORRECT_GUESSES - numIncorrectGuesses << std::endl;
 
-    // Check if the guess is correct
-    if (std::find(secretWord.begin(), secretWord.end(), guess) != secretWord.end())
+// Prompt the player to enter a guess
+std::cout << "Enter a guess: ";
+char guess;
+std::cin >> guess;
+
+// Check if the guess is correct
+if (std::find(secretWord.begin(), secretWord.end(), guess) != secretWord.end())
+{
+  // Add the guess to the correct guesses vector
+  correctGuesses.push_back(guess);
+
+  // Check if the player has won
+  bool won = true;
+  for (char ch : secretWord)
+  {
+    if (std::find(correctGuesses.begin(), correctGuesses.end(), ch) == correctGuesses.end())
     {
-      // Add the guess to the correct guesses vector
-      correctGuesses.push_back(guess);
+      won = false;
+      break;
+    }
+  }
 
-      // Check if the player has won
-      bool won = true;
-      for (char ch : secretWord)
-      {
-        if (std::find(correctGuesses.begin(), correctGuesses.end(), ch) == correctGuesses.end())
-        {
-          won = false;
-          break;
-        }
-      }
+  if (won)
+  {
+    std::cout << "Congratulations, you won!" << std::endl;
+   
 
-      if (won)
-      {
-        std::cout << "Congratulations, you won!" << std::endl;
         break;
       }
     }
@@ -91,5 +97,6 @@ int main()
   }
 
   system("pause");
+
 
   return 0;}
